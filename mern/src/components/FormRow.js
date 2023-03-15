@@ -4,8 +4,8 @@ const FormRow = ({type,name,handleChange,value,lableText}) => {
       <label htmlFor={name} 
       className="form-label">
         {lableText|| name}
-
       </label>
+      
       <input type={type} 
       value={value} name='name'
       onChange={handleChange}  

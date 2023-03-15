@@ -8,7 +8,7 @@ const initialState = {
   email:'',
   password:'',
   isMember:true,
-  showAlert:true
+  showAlert:false
 }
 
 
