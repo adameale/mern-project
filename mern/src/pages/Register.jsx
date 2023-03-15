@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Logo,FormRow,Alert } from "../components"
 import Wrapper from "../Assets/Wrappers/RegisterPage"
+import { useAppContext } from '../context/AppContext';
 
 
 const initialState = {
@@ -8,23 +9,28 @@ const initialState = {
   email:'',
   password:'',
   isMember:true,
-  showAlert:false
+ 
 }
 
 
 const Register = () => {
   const [values,setValues] =useState(initialState)
-  
+  const {isLoading,showAlert,displayAlert } =useAppContext()
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
-  const handleChange =(e) => {
-    console.log(e.target)
-  }
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   const onSubmit =(e) => {
     e.preventDefault()
-    console.log(e.target)
+    const {name,email,password,isMember } =values
+    if(!email || !password||(!isMember && !name)){
+      displayAlert()
+      return
+    }
+    console.log(values);
   }
   
   return (
@@ -32,10 +38,10 @@ const Register = () => {
     <form className="form" onSubmit={onSubmit}>
       <Logo />
       <h3>
-        {values.isMember ? 'Login':'Register'}
+        {values.isMember ? 'Register':'Login'}
       </h3>
-      {values.showAlert && <Alert />}
-      {!values.isMember && (
+      {showAlert && <Alert />}
+      {values.isMember && (
     <FormRow 
     type='text'
      name='name'
@@ -56,18 +62,17 @@ const Register = () => {
       handleChange={handleChange}
        />
 
-     <button 
-     type='submit' className="btn btn-block">
-        Submit
-      <p> {values.isMember ? 'not  a member yet':'already a member ?'}
+<button type='submit' className='btn btn-block' disabled={isLoading}>
+          submit
+        </button>
+      <p> {values.isMember ?'already a member ?' :'not  a member yet'}
          <button type="button" 
       onClick={toggleMember} 
       className='member-btn'> 
-      {values.isMember ? 'Register' :'Login'}
+      {values.isMember ? 'Login' :'Register'}
       </button></p>
-     </button>
-
-    </form></Wrapper>
+    
+</form></Wrapper>
   
   )
 }
