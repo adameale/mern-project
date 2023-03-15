@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Wrapper from "../Assets/Wrappers/ErrorPage";
-import     img      from  "../Assets/images/not-found.svg"
+import Wrapper from "../Assets/Wrappers/Testing";
+import     img   from  "../Assets/images/not-found.svg"
 const Error = () => {
   return (
     <Wrapper className="full-page">
