@@ -6,14 +6,21 @@ dotenv.config()
 import connectDB from "./db/conection.js";
 
 import AuthoRoutes from './routes/AuthoRoutes.js'
+import JobRoutes from './routes/JobRoutes.js'
+
 import errorHandlerM from "./middleware/Error_Handler.js";
 import Not_found from "./middleware/Not_found.js";
 
+app.use(express.json())
 
 app.get('/',(req,res)=>{
     throw new Error('error')
 res.send('welcome! ')    
 })
+
+app.use('/api/v1/auth', AuthoRoutes)
+app.use('/api/v1/Job', JobsRoutes)  
+
 app.use(Not_found)
 app.use(errorHandlerM)
 const port=process.env.PORT||500
