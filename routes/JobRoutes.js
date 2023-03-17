@@ -8,8 +8,8 @@ import { createJob,
      updateJob, 
      showStats } from '../controllers/JobController.js'
   
- router.route('/'.post(createJob).get(getAllJobs))
+ router.route('/').post(createJob).get(getAllJobs)
  router.route('/stats').get(showStats)
- router.route('/:id'.delete(deleteJob).patch(updateJob) 
-) 
+ router.route('/:id').delete(deleteJob).patch(updateJob) 
+
      export default router

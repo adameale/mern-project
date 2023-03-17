@@ -14,12 +14,12 @@ import Not_found from "./middleware/Not_found.js";
 app.use(express.json())
 
 app.get('/',(req,res)=>{
-    throw new Error('error')
+    
 res.send('welcome! ')    
 })
 
 app.use('/api/v1/auth', AuthoRoutes)
-app.use('/api/v1/Job', JobsRoutes)  
+app.use('/api/v1/Jobs', JobRoutes)  
 
 app.use(Not_found)
 app.use(errorHandlerM)
