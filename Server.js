@@ -1,3 +1,4 @@
+
 import  express  from "express";
 const app =express()
 import dotenv from 'dotenv'
@@ -11,11 +12,12 @@ import JobRoutes from './routes/JobRoutes.js'
 import errorHandlerM from "./middleware/Error_Handler.js";
 import Not_found from "./middleware/Not_found.js";
 
+
 app.use(express.json())
 
 app.get('/',(req,res)=>{
     
-res.send('welcome! ')    
+res.json({msg:'welcome! '})    
 })
 
 app.use('/api/v1/auth', AuthoRoutes)
