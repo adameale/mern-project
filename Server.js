@@ -4,6 +4,7 @@ const app =express()
 import dotenv from 'dotenv'
 dotenv.config()
 import 'express-async-errors'
+import morgan from 'morgan'
 import connectDB from "./db/conection.js";
 
 import AuthoRoutes from './routes/AuthoRoutes.js'
@@ -12,7 +13,9 @@ import JobRoutes from './routes/JobRoutes.js'
 import errorHandlerM from "./middleware/Error_Handler.js";
 import Not_found from "./middleware/Not_found.js";
 
-
+if(process.env.NODE_ENV !=='production'){
+  app.use(morgan('dev'));
+}
 app.use(express.json())
 
 app.get('/',(req,res)=>{
@@ -20,12 +23,12 @@ app.get('/',(req,res)=>{
 res.json({msg:'welcome! '})    
 })
 
-app.use('/api/v1/auth', AuthoRoutes)
-app.use('/api/v1/Jobs', JobRoutes)  
+app.use('/api/v1/auth', AuthoRoutes);
+app.use('/api/v1/Jobs', JobRoutes);  
 
-app.use(Not_found)
-app.use(errorHandlerM)
-const port=process.env.PORT||500
+app.use(Not_found);
+app.use(errorHandlerM);
+const port=process.env.PORT||500;
 
 
 const start = async () =>{
@@ -38,4 +41,4 @@ const start = async () =>{
         console.log(error);
       }
     };
-start()
+start();

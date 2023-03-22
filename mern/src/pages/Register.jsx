@@ -18,7 +18,7 @@ const Register = () => {
   const navigate= useNavigate()
   const [values,setValues] =useState(initialState)
 
-  const {user,isLoading,showAlert,displayAlert, registerUser } =useAppContext();
+  const {user,isLoading,showAlert,displayAlert,setUpUser } =useAppContext();
   const toggleMember = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
@@ -33,31 +33,34 @@ const Register = () => {
       displayAlert()
       return
     }
-    const currentUser= {name,email,password}
+    const currentUser= {name,email,password};
     if(isMember){
-      console.log('already a member');
+      setUpUser({currentUser,
+        endPoint:'login',
+        alertText:'Login Successful! Redirecting..........',});
     } else {
-      registerUser(currentUser)
+      setUpUser({currentUser,
+        endPoint:'register',
+        alertText:'User Created! Redirecting..........',});
     }
    
   }
   useEffect( () =>{
     if(user){
       setTimeout(() =>{
-        navigate('/Landing')
-      },300)
+        navigate('/')
+      },3000)
     }
   },[user, navigate])
   
   return (
-   <Wrapper  className='full-page'>
-    <form className="form" onSubmit={onSubmit}>
+    <Wrapper className='full-page'>
+    <form className='form' onSubmit={onSubmit}>
       <Logo />
-      <h3>
-        {values.isMember ? 'Register':'Login'}
-      </h3>
+      <h3>{values.isMember ? 'Login' : 'Register'}</h3>
       {showAlert && <Alert />}
-      {values.isMember && (
+      {/* name input */}
+      {!values.isMember && (
     <FormRow 
     type='text'
      name='name'
@@ -81,16 +84,16 @@ const Register = () => {
 <button type='submit' className='btn btn-block' disabled={isLoading}>
           submit
         </button>
-      <p> {values.isMember ?'already a member ?' :'not  a member yet'}
-         <button type="button" 
-      onClick={toggleMember} 
-      className='member-btn'> 
-      {values.isMember ? 'Login' :'Register'}
-      </button></p>
-    
-</form></Wrapper>
+        <p>
+          {values.isMember ? 'Not a member yet?' : 'Already a member?'}
+          <button type='button' onClick={toggleMember} className='member-btn'>
+            {values.isMember ? 'Register' : 'Login'}
+          </button>
+        </p>
+      </form>
+      </Wrapper>
   
-  )
-}
+  );
+};
 
 export default Register
