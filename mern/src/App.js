@@ -13,7 +13,7 @@ function App() {
     <Route  path="/register" element={<Register />}/>
     <Route  path="/landing" element={<Landing />}/>
     <Route  path="/Error" element={<Error />}/>
-    <Route  path="*" element={<ErrorPage />}/>   */}
+    <Route  path="*" element={<ErrorPage />}/>   
   </Routes>
   </BrowserRouter>
   
