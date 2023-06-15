@@ -9,7 +9,6 @@ import connectDB from "./db/conection.js";
 
 import AuthoRoutes from './routes/AuthoRoutes.js'
 import JobRoutes from './routes/JobRoutes.js'
-
 import errorHandlerM from "./middleware/Error_Handler.js";
 import Not_found from "./middleware/Not_found.js";
 
@@ -28,7 +27,7 @@ app.use('/api/v1/Jobs', JobRoutes);
 
 app.use(Not_found);
 app.use(errorHandlerM);
-const port=process.env.PORT||500;
+const port=process.env.PORT||5000;
 
 
 const start = async () =>{
@@ -38,7 +37,7 @@ const start = async () =>{
           console.log(`Server is listening on port ${port}...`);
         });
       } catch (error) {
-        console.log(error);
+        console.log(error);    
       }
     };
 start();
